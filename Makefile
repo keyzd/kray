@@ -29,3 +29,4 @@ clean:
 	rm -r $(BUILD_DIR)
 
 run: $(BUILD_DIR)/$(TARGET_EXEC)
+	./$(BUILD_DIR)/$(TARGET_EXEC)

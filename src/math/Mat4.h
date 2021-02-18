@@ -6,23 +6,23 @@ class Mat4 {
 public:
 	Mat4();
 	Mat4(
-		double col0_0, double col0_1, double col0_2, double col0_3,
-		double col1_0, double col1_1, double col1_2, double col1_3,
-		double col2_0, double col2_1, double col2_2, double col2_3,
-		double col3_0, double col3_1, double col3_2, double col3_3
+		float col0_0, float col0_1, float col0_2, float col0_3,
+		float col1_0, float col1_1, float col1_2, float col1_3,
+		float col2_0, float col2_1, float col2_2, float col2_3,
+		float col3_0, float col3_1, float col3_2, float col3_3
 	);
-	Mat4(double diag);
+	Mat4(float diag);
 	Mat4(const Vec4& a_col0, const Vec4& a_col1, const Vec4& a_col2, const Vec4& a_col3);
 
 	Vec4& operator[](unsigned int index);
 	Vec4 operator[](unsigned int index) const;
 
-	Mat4 operator*(double t) const;
-	const Mat4& operator*=(double t);
+	Mat4 operator*(float t) const;
+	const Mat4& operator*=(float t);
 	const Mat4& operator*=(const Mat4& m);
 
-	Mat4 operator/(double t) const;
-	const Mat4& operator/=(double t);
+	Mat4 operator/(float t) const;
+	const Mat4& operator/=(float t);
 
 	Vec4 operator*(const Vec4& u) const;
 	Mat4 operator*(const Mat4& m) const;
@@ -33,7 +33,7 @@ private:
 
 //==================================================
 
-inline Mat4 operator*(const double t, const Mat4 &m) {
+inline Mat4 operator*(const float t, const Mat4 &m) {
 	return Mat4(m[0].x*t, m[0].y*t, m[0].z*t, m[0].w*t,
 				m[1].x*t, m[1].y*t, m[1].z*t, m[1].w*t,
 				m[2].x*t, m[2].y*t, m[2].z*t, m[2].w*t,
@@ -51,10 +51,10 @@ inline Mat4::Mat4() {
 }
 
 inline Mat4::Mat4(
-		double col0_0, double col0_1, double col0_2, double col0_3,
-		double col1_0, double col1_1, double col1_2, double col1_3,
-		double col2_0, double col2_1, double col2_2, double col2_3,
-		double col3_0, double col3_1, double col3_2, double col3_3
+		float col0_0, float col0_1, float col0_2, float col0_3,
+		float col1_0, float col1_1, float col1_2, float col1_3,
+		float col2_0, float col2_1, float col2_2, float col2_3,
+		float col3_0, float col3_1, float col3_2, float col3_3
 	) {
 	columns[0] = Vec4(col0_0, col0_1, col0_2, col0_3);
 	columns[1] = Vec4(col1_0, col1_1, col1_2, col1_3);
@@ -62,7 +62,7 @@ inline Mat4::Mat4(
 	columns[3] = Vec4(col1_0, col1_1, col2_2, col3_3);
 }
 
-inline Mat4::Mat4(double diag) {
+inline Mat4::Mat4(float diag) {
 	columns[0] = Vec4(diag, 0, 0, 0);
 	columns[1] = Vec4(0, diag, 0, 0);
 	columns[2] = Vec4(0, 0, diag, 0);
@@ -84,7 +84,7 @@ inline Vec4 Mat4::operator[](unsigned int index) const {
 	return columns[index];
 }
 
-inline Mat4 Mat4::operator*(double t) const {
+inline Mat4 Mat4::operator*(float t) const {
 	return Mat4(columns[0].x*t, columns[0].y*t, columns[0].z*t, columns[0].w*t,
 				columns[1].x*t, columns[1].y*t, columns[1].z*t, columns[1].w*t,
 				columns[2].x*t, columns[2].y*t, columns[2].z*t, columns[2].w*t,
@@ -92,7 +92,7 @@ inline Mat4 Mat4::operator*(double t) const {
 	);
 }
 
-inline const Mat4& Mat4::operator*=(double t) {
+inline const Mat4& Mat4::operator*=(float t) {
 	columns[0] *= t;
 	columns[1] *= t;
 	columns[2] *= t;
@@ -100,7 +100,7 @@ inline const Mat4& Mat4::operator*=(double t) {
 	return *this;
 }
 
-inline Mat4 Mat4::operator/(double t) const {
+inline Mat4 Mat4::operator/(float t) const {
 	return Mat4(columns[0].x/t, columns[0].y/t, columns[0].z/t, columns[0].w/t,
 				columns[1].x/t, columns[1].y/t, columns[1].z/t, columns[1].w/t,
 				columns[2].x/t, columns[2].y/t, columns[2].z/t, columns[2].w/t,
@@ -108,7 +108,7 @@ inline Mat4 Mat4::operator/(double t) const {
 	);
 }
 
-inline const Mat4& Mat4::operator/=(double t) {
+inline const Mat4& Mat4::operator/=(float t) {
 	columns[0] /= t;
 	columns[1] /= t;
 	columns[2] /= t;

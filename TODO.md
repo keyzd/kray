@@ -1,13 +1,35 @@
-# 2021-02-07
-- [ ] define program pipelines and what it should be at all
+# camera
+- [ ] depth of field
+- [ ] custom lens modelling
 
-# Next
-- [ ] geometry layer
-	- [ ] shapes
-	- [ ] scene representation
+# geometry layer
+- [ ] shapes
+	- [x] abstract object
+	- [x] sphere
+	- [ ] plane
+	- [ ] cube
+	- [ ] ellipse
+- [ ] scene representation
 	- [ ] acceleration structures
-- [ ] camera
-- [ ]
+- [ ] transformations
+	- [ ]
+- [ ] constructive solid geometry
+	- [ ]
 
-# Planned
-- [ ]
+# renderer layer
+- [ ] light
+- [ ] materials
+	- [ ] matte
+	- [ ] phong
+	- [ ] reflections
+	- [ ] glass
+	- [ ] non-realistic shading
+- [ ] distributed ray tracing
+	- [ ] anti-aliasing
+	- [ ] gloss
+	- [ ] translucency
+	- [ ] soft shadows (penumbra)
+	- [ ] motion blur (also in animation system)
+
+# user level
+- [ ] scripting (lua api)

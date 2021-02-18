@@ -13,7 +13,6 @@ public:
 	void SetPixel( uint32_t pixel, uint32_t x, uint32_t y );
 	uint32_t GetPixel( uint32_t x, uint32_t y ) const;
 
-private:
 	uint32_t* buf;
 	uint32_t width, height;
 };

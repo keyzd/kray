@@ -6,22 +6,22 @@ class Mat3 {
 public:
 	Mat3();
 	Mat3(
-		double col0_0, double col0_1, double col0_2,
-		double col1_0, double col1_1, double col1_2,
-		double col2_0, double col2_1, double col2_2
+		float col0_0, float col0_1, float col0_2,
+		float col1_0, float col1_1, float col1_2,
+		float col2_0, float col2_1, float col2_2
 	);
-	Mat3(double diag);
+	Mat3(float diag);
 	Mat3(const Vec3& a_col0, const Vec3& a_col1, const Vec3& a_col2);
 
 	Vec3& operator[](unsigned int index);
 	Vec3 operator[](unsigned int index) const;
 
-	Mat3 operator*(double t) const;
-	const Mat3& operator*=(double t);
+	Mat3 operator*(float t) const;
+	const Mat3& operator*=(float t);
 	const Mat3& operator*=(const Mat3& m);
 
-	Mat3 operator/(double t) const;
-	const Mat3& operator/=(double t);
+	Mat3 operator/(float t) const;
+	const Mat3& operator/=(float t);
 
 	Vec3 operator*(const Vec3& u) const;
 	Mat3 operator*(const Mat3& m) const;
@@ -32,7 +32,7 @@ private:
 
 //==================================================
 
-inline Mat3 operator*(const double t, const Mat3 &m) {
+inline Mat3 operator*(const float t, const Mat3 &m) {
 	return Mat3(m[0].x*t, m[0].y*t, m[0].z*t,
 				m[1].x*t, m[1].y*t, m[1].z*t,
 				m[2].x*t, m[2].y*t, m[2].z*t
@@ -47,15 +47,15 @@ inline Mat3::Mat3() {
 	columns[2] = Vec3(0);
 }
 
-inline Mat3::Mat3(double col0_0, double col0_1, double col0_2,
-				  double col1_0, double col1_1, double col1_2,
-				  double col2_0, double col2_1, double col2_2) {
+inline Mat3::Mat3(float col0_0, float col0_1, float col0_2,
+				  float col1_0, float col1_1, float col1_2,
+				  float col2_0, float col2_1, float col2_2) {
 	columns[0] = Vec3(col0_0, col0_1, col0_2);
 	columns[1] = Vec3(col1_0, col1_1, col1_2);
 	columns[2] = Vec3(col1_0, col1_1, col2_2);
 }
 
-inline Mat3::Mat3(double diag) {
+inline Mat3::Mat3(float diag) {
 	columns[0] = Vec3(diag, 0, 0);
 	columns[1] = Vec3(0, diag, 0);
 	columns[2] = Vec3(0, 0, diag);
@@ -75,28 +75,28 @@ inline Vec3 Mat3::operator[](unsigned int index) const {
 	return columns[index];
 }
 
-inline Mat3 Mat3::operator*(double t) const {
+inline Mat3 Mat3::operator*(float t) const {
 	return Mat3(columns[0].x*t, columns[0].y*t, columns[0].z*t,
 				columns[1].x*t, columns[1].y*t, columns[1].z*t,
 				columns[2].x*t, columns[2].y*t, columns[2].z*t
 	);
 }
 
-inline const Mat3& Mat3::operator*=(double t) {
+inline const Mat3& Mat3::operator*=(float t) {
 	columns[0] *= t;
 	columns[1] *= t;
 	columns[2] *= t;
 	return *this;
 }
 
-inline Mat3 Mat3::operator/(double t) const {
+inline Mat3 Mat3::operator/(float t) const {
 	return Mat3(columns[0].x/t, columns[0].y/t, columns[0].z/t,
 				columns[1].x/t, columns[1].y/t, columns[1].z/t,
 				columns[2].x/t, columns[2].y/t, columns[2].z/t
 	);
 }
 
-inline const Mat3& Mat3::operator/=(double t) {
+inline const Mat3& Mat3::operator/=(float t) {
 	columns[0] /= t;
 	columns[1] /= t;
 	columns[2] /= t;

@@ -1,2 +1,5 @@
 build/
 deps.mk
+*.ppm
+*.vim
+src/tags
