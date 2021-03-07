@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#include "math/Vec3.h"
+#include "math/Vec3.hpp"
 
 class PpmImage {
 public:

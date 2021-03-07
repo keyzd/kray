@@ -1,8 +1,8 @@
 #pragma once
 
-class KrayApp {
+class Server {
 public:
-	KrayApp();
+	Server();
 
 	bool ArgvOptionsParse( int argc, char *argv[] );
 

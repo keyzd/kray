@@ -2,8 +2,8 @@
 
 #include <math.h>
 
-#include "Vec2.h"
-#include "Vec3.h"
+#include "Vec2.hpp"
+#include "Vec3.hpp"
 
 class Vec4 {
 public:
@@ -39,6 +39,14 @@ public:
 	Vec4 operator/(const float t) const;
 	bool operator==(const Vec4& u) const;
 
+	friend Vec4 operator*(const float t, const Vec4 &u);
+	friend Vec4 operator/(const float t, const Vec4 &u);
+	friend Vec4 operator+(const float t, const Vec4 &u);
+	friend Vec4 operator-(const float t, const Vec4 &u);
+	friend float dot(const Vec4& u, const Vec4& v);
+	friend float length(const Vec3& u );
+	friend Vec4 normalize(const Vec4& u);
+	friend Vec4 reflect(const Vec4& I, const Vec4& N);
 };
 
 //==================================================

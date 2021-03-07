@@ -2,8 +2,8 @@
 
 #include <stdint.h>
 
-#include "utils/List.h"
-#include "objects/IObject.h"
+#include "utils/List.hpp"
+#include "objects/IObject.hpp"
 
 class Scene {
 public:
@@ -12,6 +12,8 @@ public:
 	const IObject* GetObjectPtr( uint32_t i ) const;
 
 	uint32_t CountObjects() const;
+
+	~Scene();
 
 private:
 	List<IObject*> objects;
@@ -27,4 +29,10 @@ inline uint32_t Scene::CountObjects() const {
 
 inline const IObject* Scene::GetObjectPtr( uint32_t i ) const {
 	return objects[ i ];
+}
+
+inline Scene::~Scene() {
+	for( uint32_t i = 0; i < objects.Count(); i++ ) {
+		objects[ i ]->Delete();
+	}
 }

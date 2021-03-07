@@ -1,4 +1,4 @@
-#include "Framebuffer.h"
+#include "Framebuffer.hpp"
 
 Framebuffer::Framebuffer(uint32_t a_width, uint32_t a_height) {
 	width = a_width;

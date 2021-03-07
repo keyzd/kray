@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../math/Vec3.h"
-#include "ShadeRecord.h"
+#include "../math/Vec3.hpp"
+#include "ShadeRecord.hpp"
 
 class IMaterial {
 public:

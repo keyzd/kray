@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "KrayApp.h"
-#include "common.h"
+#include "Server.hpp"
+#include "../common.hpp"
 
-KrayApp::KrayApp() {
+Server::Server() {
 	options.width = 0;
 	options.height = 0;
 	options.ssaaOn = 0;
 }
 
-bool KrayApp::ArgvOptionsParse( int argc, char *argv[] ) {
+bool Server::ArgvOptionsParse( int argc, char *argv[] ) {
 	for( int i = 1; i < argc; i+=2 ) {
 		if( argv[i][0] != '-' ) {
 			printf( "%s: wrong command\n", argv[i] );

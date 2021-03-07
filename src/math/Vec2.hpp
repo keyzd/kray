@@ -25,6 +25,14 @@ public:
 	Vec2 operator/(const float t) const;
 	bool operator==(const Vec2& u) const;
 
+	friend Vec2 operator*(const float t, const Vec2 &u);
+	friend Vec2 operator/(const float t, const Vec2 &u);
+	friend Vec2 operator+(const float t, const Vec2 &u);
+	friend Vec2 operator-(const float t, const Vec2 &u);
+	friend float dot(const Vec2& u, const Vec2& v);
+	friend float length(const Vec2& u );
+	friend Vec2 normalize(const Vec2& u);
+	friend Vec2 reflect(const Vec2& I, const Vec2& N);
 };
 
 //==================================================

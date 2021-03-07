@@ -1,19 +1,23 @@
-#include "Sphere.h"
+#include "Sphere.hpp"
 
-/*
-bool Sphere::Intersect( const Ray &ray, Vec3 &intersectAt ) const {
-	Vec3 oc = ray.GetOrigin() - position;
-	float a = dot( ray.GetDirection(), ray.GetDirection() );
-	float b = dot( oc, ( ray.GetDirection() ) * 2.0 );
-	float c = dot( oc, ( oc ) - radius*radius );
-	float discr = b * b - 4 * a * c;
-
-	if(discr < 0.0) {
+#ifdef INTERSECT_SPHERE_ALGEBRAIC
+bool Sphere::Intersect( const Ray &ray, Vec3 &hitPoint, List<float> *hitT ) const {
+	if( dot( ray.GetDirection() - ray.GetOrigin(), position ) <= 0.0f ) {
 		return false;
 	}
 
-	float t1 = ( -b + sqrt( discr ) ) / ( 2.0 * a );
-	float t2 = ( -b - sqrt( discr ) ) / ( 2.0 * a );
+	Vec3 oc = ray.GetOrigin() - position;
+	float a = dot( ray.GetDirection(), ray.GetDirection() );
+	float b = dot( oc, ( ray.GetDirection() ) * 2.0f );
+	float c = dot( oc, oc ) - radius * radius;
+	float discr = b * b - 4.0f * a * c;
+
+	if( discr < 0.0f ) {
+		return false;
+	}
+
+	float t1 = ( -b + sqrt( discr ) ) / ( 2.0f * a );
+	float t2 = ( -b - sqrt( discr ) ) / ( 2.0f * a );
 	float t;
 
 	if( t1 < t2) {
@@ -22,32 +26,46 @@ bool Sphere::Intersect( const Ray &ray, Vec3 &intersectAt ) const {
 		t = t2;
 	}
 
-	intersectAt = ray.AtPoint( t );
+	hitPoint = ray.AtPoint( t - 0.0001f );
+
+	if( hitT ) {
+		if( t1 < t2) {
+			hitT->Push( t1 );
+			hitT->Push( t2 );
+		} else {
+			hitT->Push( t2 );
+			hitT->Push( t1 );
+		}
+	}
 
 	return true;
 }
-*/
+#endif
 
-Vec3 Sphere::GetNormatAt( const Vec3 &intersectAt ) const {
-	return normalize( intersectAt - this->GetPosition() );
+Vec3 Sphere::GetNormatAt( const Vec3 &hitPoint ) const {
+	return normalize( hitPoint - position );
 }
 
-bool Sphere::Intersect( const Ray &ray, Vec3 &intersectAt ) const {
+#ifndef INTERSECT_SPHERE_ALGEBRAIC
+// Work wrong ( why??? )
+bool Sphere::Intersect( const Ray &ray, Vec3 &hitPoint, List<float> *hitT ) const {
 	Vec3 dir = ray.GetDirection() - ray.GetOrigin();
 
-	if( dot( dir, this->GetPosition() ) <= 0.00 ) {
+	if( dot( dir, position ) <= 0.00 ) {
 		return false;
 	}
 
 	Vec3 dirn = normalize( dir );
-	Vec3 op = dirn * ( dot( this->GetPosition(), dirn ) );
-	Vec3 cp = op - this->GetPosition();
+	Vec3 op = dirn * ( dot( position, dirn ) );
+	Vec3 cp = position - op;
+	float cpLen = length( cp );
 
-	if( length(cp) <= this->GetRadius() ) {
-		float pn = sqrtf( powf( this->GetRadius(), 2. ) - powf( length(cp), 2. ) );
-		intersectAt = op-pn;
+	if( cpLen <= radius ) {
+		float pn = sqrtf( radius * radius - cpLen * cpLen );
+		hitPoint = op - pn - 0.001;
 		return true;
-	} else {
-		return false;
 	}
+
+	return false;
 }
+#endif

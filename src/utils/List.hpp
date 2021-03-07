@@ -13,6 +13,7 @@ private:
 
 public:
 	List();
+	List( T initValue );
 	List( const List& list );
 	~List();
 
@@ -39,6 +40,7 @@ unsigned int List<T>::Capacity() const {
 template <class T>
 void List<T>::Clear() {
 	delete [] buf;
+	buf = new T[ 8 ];
 	capacity = 8;
 	count = 0;
 }
@@ -76,13 +78,22 @@ List<T>::List( const List &list ) {
 }
 
 template <class T>
+List<T>::List( T initValue ) {
+	count = 0;
+	capacity = 8;
+	buf = new T[ 8 ];
+	for( unsigned int i = 0; i < capacity; i++ ) {
+		buf[ i ] = initValue;
+	}
+}
+
+template <class T>
 List<T>::~List() {
-	Clear();
 }
 
 template <class T>
 void List<T>::Push( T item ) {
-	if( count == capacity ) {
+	if( count == capacity - 1 ) {
 		capacity *= 2;
 		T *buf_tmp = new T[ capacity ];
 		for( unsigned int i = 0; i < count; i++ ) {

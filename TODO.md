@@ -8,12 +8,19 @@
 	- [x] sphere
 	- [ ] plane
 	- [ ] cube
-	- [ ] ellipse
+	- [ ] ellipse3d
+	- [ ] polygon
+	- [ ] ellipse2d
 - [ ] scene representation
 	- [ ] acceleration structures
 - [ ] transformations
-	- [ ]
-- [ ] constructive solid geometry
+	- [ ] translation
+	- [ ] rotation
+	- [ ] skew
+	- [ ] scale
+	- [ ] projection (???)
+	- [ ] instancing
+- [ ] constructive solid geometry (CSG)
 	- [ ]
 
 # renderer layer

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMaterial.h"
+#include "IMaterial.hpp"
 
 class MaterialNormalMap : public IMaterial {
 public:

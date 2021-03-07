@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Framebuffer.h"
-#include "math/Ray.h"
-#include "Scene.h"
+#include "../Framebuffer.hpp"
+#include "../math/Ray.hpp"
+#include "../Scene.hpp"
+
+#define CLOSEST_DEFAULT_INDEX -1
 
 void R_UpdateFrame( const Scene &scene, Framebuffer &fb );
 

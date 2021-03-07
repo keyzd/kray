@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IObject.h"
+#include "IObject.hpp"
 
 class Sphere : public IObject {
 public:
@@ -13,8 +13,8 @@ public:
 	Vec3 GetPosition() const;
 	float GetRadius() const;
 
-	virtual bool Intersect( const Ray &ray, Vec3 &intersectAt ) const;
-	virtual Vec3 GetNormatAt( const Vec3 &intersectAt ) const;
+	virtual bool Intersect( const Ray &ray, Vec3 &hitPoint, List<float> *hitT ) const;
+	virtual Vec3 GetNormatAt( const Vec3 &hitPoint ) const;
 
 private:
 	Vec3 position;

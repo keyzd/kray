@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vec4.h"
+#include "Vec4.hpp"
 
 class Mat4 {
 public:

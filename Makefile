@@ -1,32 +1,48 @@
 CXX := clang++
-CXXFLAGS := -g -Wall
+CXXFLAGS := -g -Wall 
+CXXFLAGS += -DINTERSECT_SPHERE_ALGEBRAIC
 LDFLAGS := -lm
 
-SRC_DIRS := ./src
+SRC_COMMON_DIR := ./src
+SRC_CLIENT_DIR := $(SRC_COMMON_DIR)/client
+SRC_SERVER_DIR := $(SRC_COMMON_DIR)/server
+
+MAIN_CLIENT := main_client.cpp
+MAIN_SERVER := main_server.cpp
+
 BUILD_DIR := ./build
-TARGET_EXEC := kray
-MAIN_SRC := main.cpp
 
-SRCS := $(shell find $(SRC_DIRS) -name *.cpp ! -name $(MAIN_SRC))
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+EXEC_CLIENT := client
+EXEC_SERVER := server
 
-$(BUILD_DIR)/%.cpp.o: %.cpp %.h
+SRCS_CLIENT := $(shell find $(SRC_COMMON_DIR) -name '*.cpp' ! -name $(MAIN_CLIENT) ! -path $(SRC_SERVER_DIR)'/*')
+OBJS_CLIENT := $(SRCS_CLIENT:%=$(BUILD_DIR)/%.o)
+
+SRCS_SERVER := $(shell find $(SRC_COMMON_DIR) -name '*.cpp' ! -name $(MAIN_SERVER) ! -path $(SRC_CLIENT_DIR)'/*')
+OBJS_SERVER := $(SRCS_SERVER:%=$(BUILD_DIR)/%.o)
+
+$(BUILD_DIR)/%.cpp.o: %.cpp %.hpp
 	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS) $(SRC_DIRS)/$(MAIN_SRC)
+$(BUILD_DIR)/$(EXEC_CLIENT): $(OBJS_CLIENT) $(SRC_CLIENT_DIR)/$(MAIN_CLIENT)
 	$(CXX) $^ -o $@ $(LDFLAGS)
+
+$(BUILD_DIR)/$(EXEC_SERVER): $(OBJS_SERVER) $(SRC_SERVER_DIR)/$(MAIN_SERVER)
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+$(EXEC_CLIENT): $(BUILD_DIR)/$(EXEC_CLIENT)
+$(EXEC_SERVER): $(BUILD_DIR)/$(EXEC_SERVER)
+
+all: $(EXEC_CLIENT) $(EXEC_SERVER)
 
 ifneq (clean, $(MAKECMDGOALS))
 -include deps.mk
 endif
 
-deps.mk: $(SRCS) $(SRC_DIRS)/$(MAIN_SRC)
+deps.mk: $(SRCS_CLIENT) $(SRC_CLIENT_DIR)/$(MAIN_CLIENT) $(SRCS_SERVER) $(SRC_SERVER_DIR)/$(MAIN_SERVER)
 	$(CXX) -MM $^ > $@
 
 .PHONY: clean
 clean:
 	rm -r $(BUILD_DIR)
-
-run: $(BUILD_DIR)/$(TARGET_EXEC)
-	./$(BUILD_DIR)/$(TARGET_EXEC)

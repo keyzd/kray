@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "Vec2.h"
+#include "Vec2.hpp"
 
 class Vec3 {
 public:
@@ -35,6 +35,14 @@ public:
 	Vec3 operator/(const float t) const;
 	bool operator==(const Vec3& u) const;
 
+	friend Vec3 operator*(const float t, const Vec3 &u);
+	friend Vec3 operator/(const float t, const Vec3 &u);
+	friend Vec3 operator+(const float t, const Vec3 &u);
+	friend Vec3 operator-(const float t, const Vec3 &u);
+	friend float dot(const Vec3& u, const Vec3& v);
+	friend float length(const Vec3& u );
+	friend Vec3 normalize(const Vec3& u);
+	friend Vec3 reflect(const Vec3& I, const Vec3& N);
 };
 
 //==================================================

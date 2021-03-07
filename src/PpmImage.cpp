@@ -1,6 +1,6 @@
-#include "PpmImage.h"
+#include "PpmImage.hpp"
 
-#include "common.h"
+#include "common.hpp"
 
 PpmImage::PpmImage( uint32_t a_width, uint32_t a_height, const char* ppmFilePath ) {
 	width = a_width;

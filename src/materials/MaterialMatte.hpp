@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMaterial.h"
+#include "IMaterial.hpp"
 
 class MaterialMatte : public IMaterial {
 public:
