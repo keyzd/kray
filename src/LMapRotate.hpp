@@ -3,7 +3,6 @@
  * theta < 0 -> clockwise rotation
  */
 
-
 #pragma once
 
 #include "LMap.hpp"
