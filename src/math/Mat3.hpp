@@ -13,6 +13,8 @@ public:
 	Mat3(float diag);
 	Mat3(const Vec3& a_col0, const Vec3& a_col1, const Vec3& a_col2);
 
+	Mat3 Transpose() const;
+
 	Vec3& operator[](unsigned int index);
 	Vec3 operator[](unsigned int index) const;
 
@@ -65,6 +67,13 @@ inline Mat3::Mat3(const Vec3& a_col0, const Vec3& a_col1, const Vec3& a_col2) {
 	columns[0] = a_col0;
 	columns[1] = a_col1;
 	columns[2] = a_col2;
+}
+
+inline Mat3 Mat3::Transpose() const {
+	Vec3 col0( columns[0].x, columns[1].x, columns[2].x );
+	Vec3 col1( columns[0].y, columns[1].y, columns[2].y );
+	Vec3 col2( columns[0].z, columns[1].z, columns[2].z );
+	return Mat3( col0, col1, col2 );
 }
 
 inline Vec3& Mat3::operator[](unsigned int index) {

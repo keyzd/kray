@@ -1,4 +1,4 @@
-CXX := clang++
+CXX := g++
 CXXFLAGS := -g -Wall 
 CXXFLAGS += -DINTERSECT_SPHERE_ALGEBRAIC
 LDFLAGS := -lm

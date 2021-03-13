@@ -9,6 +9,8 @@ public:
 	Mat2(float diag);
 	Mat2(const Vec2& a_col0, const Vec2& a_col1);
 
+	Mat2 Transpose() const;
+
 	Vec2& operator[](unsigned int index);
 	Vec2 operator[](unsigned int index) const;
 
@@ -52,6 +54,12 @@ inline Mat2::Mat2(float diag) {
 inline Mat2::Mat2(const Vec2& a_col0, const Vec2& a_col1) {
 	columns[0] = a_col0;
 	columns[1] = a_col1;
+}
+
+inline Mat2 Mat2::Transpose() const {
+	Vec2 col0( columns[0].x, columns[1].x );
+	Vec2 col1( columns[0].y, columns[1].y );
+	return Mat2( col0, col1 );
 }
 
 inline Vec2& Mat2::operator[](unsigned int index) {

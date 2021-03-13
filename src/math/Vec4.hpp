@@ -79,7 +79,7 @@ inline Vec4 normalize(const Vec4& u) {
 }
 
 inline Vec4 reflect(const Vec4& I, const Vec4& N) {
-	return I - N * 2.0 * (I.x*N.x + I.y*N.y + I.z*N.z, I.w*N.w);
+	return I - N * 2.0 * (I.x*N.x + I.y*N.y + I.z*N.z + I.w*N.w);
 }
 
 //==================================================

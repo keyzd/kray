@@ -14,6 +14,8 @@ public:
 	Mat4(float diag);
 	Mat4(const Vec4& a_col0, const Vec4& a_col1, const Vec4& a_col2, const Vec4& a_col3);
 
+	Mat4 Transpose() const;
+
 	Vec4& operator[](unsigned int index);
 	Vec4 operator[](unsigned int index) const;
 
@@ -26,6 +28,8 @@ public:
 
 	Vec4 operator*(const Vec4& u) const;
 	Mat4 operator*(const Mat4& m) const;
+
+	friend Mat4 operator*(const float t, const Mat4 &m);
 
 private:
 	Vec4 columns[4];
@@ -74,6 +78,14 @@ inline Mat4::Mat4(const Vec4& a_col0, const Vec4& a_col1, const Vec4& a_col2, co
 	columns[1] = a_col1;
 	columns[2] = a_col2;
 	columns[3] = a_col3;
+}
+
+inline Mat4 Mat4::Transpose() const {
+	Vec4 col0( columns[0].x, columns[1].x, columns[2].x, columns[3].x );
+	Vec4 col1( columns[0].y, columns[1].y, columns[2].y, columns[3].y );
+	Vec4 col2( columns[0].z, columns[1].z, columns[2].z, columns[3].z );
+	Vec4 col3( columns[0].w, columns[1].w, columns[2].w, columns[3].w );
+	return Mat4( col0, col1, col2, col3 );
 }
 
 inline Vec4& Mat4::operator[](unsigned int index) {
