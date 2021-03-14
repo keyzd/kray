@@ -20,6 +20,8 @@
 
 #include "../math/Mat2.hpp"
 
+#include "../camera/CameraPinhole.hpp"
+
 int main( int argc, char *argv[] ) {
 	Server app;
 
@@ -45,7 +47,8 @@ int main( int argc, char *argv[] ) {
 
 	Framebuffer fb( 480, 480 );
 
-	R_UpdateFrame( scene, fb );
+	CameraPinhole cam;
+	cam.RenderScene( scene, fb );
 
 	PpmImage img( 480, 480, "out.ppm" );
 	img.SetBuf( fb.buf, fb.width*fb.height );
