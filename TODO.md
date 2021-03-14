@@ -14,10 +14,10 @@
 - [ ] scene representation
 	- [ ] acceleration structures
 - [ ] transformations
-	- [ ] translation
-	- [ ] rotation
+	- [x] translation
+	- [x] rotation
 	- [ ] skew
-	- [ ] scale
+	- [x] scale
 	- [ ] projection (???)
 	- [ ] instancing
 - [ ] constructive solid geometry (CSG)
