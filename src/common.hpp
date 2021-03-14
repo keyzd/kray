@@ -8,3 +8,13 @@
 #define UNPACK_COLOR_G(COLOR) ( COLOR >> 8 & 255 )
 #define UNPACK_COLOR_B(COLOR) ( COLOR  & 255 )
 
+template <typename T, typename U, typename V>
+inline T clamp( T val, U low, V high ) {
+	if( val < low ) return low;
+	else if(val > high ) return high;
+	else return high;
+}
+
+inline float lerp( float t, float v0, float v1 ) {
+	return ( 1 - t ) * v0 + t * v1;
+}

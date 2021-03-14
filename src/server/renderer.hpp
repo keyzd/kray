@@ -4,9 +4,9 @@
 #include "../math/Ray.hpp"
 #include "../Scene.hpp"
 
-#define CLOSEST_DEFAULT_INDEX -1
+#include "../common.hpp"
 
-void R_UpdateFrame( const Scene &scene, Framebuffer &fb );
+#define CLOSEST_DEFAULT_INDEX -1
 
 Vec3 R_Trace( const Scene &scene, const Ray &ray, float tMin, float tMax );
 
