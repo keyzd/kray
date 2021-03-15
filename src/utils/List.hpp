@@ -89,6 +89,7 @@ List<T>::List( T initValue ) {
 
 template <class T>
 List<T>::~List() {
+	delete [] buf;
 }
 
 template <class T>

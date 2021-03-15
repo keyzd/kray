@@ -1,12 +1,12 @@
 #include "IObject.hpp"
 #include "CSGObject.hpp"
 
-void IObject::SetMaterial( IMaterial* a_material ) {
-	material = a_material;
+void IObject::SetMaterial( IMaterial*& a_material ) {
+	material = &a_material;
 }
 
-IMaterial* IObject::GetMaterial() const {
-	return material;
+const IMaterial& IObject::GetMaterial() const {
+	return **material;
 }
 
 void IObject::Union( IObject* obj, CSGObject* result ) {

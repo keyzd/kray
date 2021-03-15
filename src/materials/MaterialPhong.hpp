@@ -5,10 +5,9 @@
 class MaterialPhong : public IMaterial {
 public:
 	MaterialPhong() {}
-
 	virtual Vec3 Shade( const ShadeRecord& shadeRec ) const;
 
-protected:
+private:
 	virtual ~MaterialPhong() {}
 
 	Vec3 AmbientBRDF() const;

@@ -23,7 +23,7 @@ Vec3 R_Trace( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
 	sr.ray = ray;
 	sr.normal = closestObject->GetNormatAt( hitPoint );
 
-	return closestObject->GetMaterial()->Shade( sr );
+	return closestObject->GetMaterial().Shade( sr );
 }
 
 const IObject* R_FindClosestObject( const Scene &scene, const Ray &ray, float tMin, float tMax ) {

@@ -1,3 +1,7 @@
+/*
+ * Constructive solid geomentry object
+ */
+
 #pragma once
 
 #include "../utils/List.hpp"
@@ -6,9 +10,6 @@
 #include "../math/Ray.hpp"
 #include "IObject.hpp"
 
-/*
- * Constructive solid geomentry object
- */
 class CSGObject : public IObject {
 public:
 	CSGObject();

@@ -5,10 +5,9 @@
 class MaterialMatte : public IMaterial {
 public:
 	MaterialMatte() {}
-
 	virtual Vec3 Shade( const ShadeRecord& shadeRec ) const;
 
-protected:
+private:
 	virtual ~MaterialMatte() {}
 
 	Vec3 AmbientBRDF() const;

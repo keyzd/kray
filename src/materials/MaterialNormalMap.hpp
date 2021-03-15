@@ -5,10 +5,9 @@
 class MaterialNormalMap : public IMaterial {
 public:
 	MaterialNormalMap() {}
-
 	virtual Vec3 Shade( const ShadeRecord& shadeRec ) const;
 
-protected:
+private:
 	virtual ~MaterialNormalMap() {}
 };
 
