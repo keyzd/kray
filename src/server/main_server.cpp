@@ -9,18 +9,11 @@
 #include "../Framebuffer.hpp"
 #include "renderer.hpp"
 
-#include "../objects/Sphere.hpp"
-#include "../objects/CSGObject.hpp"
-
-#include "../materials/MaterialNormalMap.hpp"
-
-#include "../LMapTranslate.hpp"
-#include "../LMapScale.hpp"
-#include "../LMapRotate.hpp"
-
-#include "../math/Mat2.hpp"
-
-#include "../camera/CameraPinhole.hpp"
+#include "../objects.hpp"
+#include "../materials.hpp"
+#include "../lmaps.hpp"
+#include "../math.hpp"
+#include "../camera.hpp"
 
 int main( int argc, char *argv[] ) {
 	Server app;
@@ -36,7 +29,7 @@ int main( int argc, char *argv[] ) {
 	Sphere *s1 = new Sphere( Vec3( 0.0f, 0.0f, 2.0f ), 0.5f );
 	s1->SetMaterial( nm );
 
-	Sphere *s2 = new Sphere( Vec3( 0.0f, 0.0f, 1.5f ), 0.2f );
+	Sphere *s2 = new Sphere( Vec3( 0.5f, 0.2f, 1.5f ), 0.2f );
 	s2->SetMaterial( nm );
 
 	scene.SetObject( s1 );

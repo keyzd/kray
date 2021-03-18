@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "math/Mat4.hpp"
+#include "../math/Mat4.hpp"
 
 class LMap {
 public:

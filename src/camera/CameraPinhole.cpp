@@ -13,6 +13,7 @@ void CameraPinhole::RenderScene( const Scene &scene, Framebuffer &fb ) {
 			float u = float( x*2.0f ) / w - 1.0f;
 			float v = float( y*2.0f ) / h - 1.0f;
 			u *= ar;
+			v *= -1.0f;
 			Ray ray( Vec3( 0.0f ), normalize( Vec3( u, v, 1.0f ) ) );
 			Vec3 color = R_Trace( scene, ray, 0.0f, INFINITY );
 

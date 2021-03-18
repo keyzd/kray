@@ -6,11 +6,6 @@
 
 template <class T>
 class List {
-private:
-	T *buf;
-	unsigned int count;
-	unsigned int capacity;
-
 public:
 	List();
 	List( T initValue );
@@ -25,6 +20,11 @@ public:
 
 	T& operator[] ( unsigned int index );
 	T operator[] ( unsigned int index ) const;
+
+private:
+	T *buf;
+	unsigned int count;
+	unsigned int capacity;
 };
 
 template <class T>
