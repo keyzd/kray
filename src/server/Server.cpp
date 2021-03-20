@@ -9,6 +9,8 @@ Server::Server() {
 	options.width = 0;
 	options.height = 0;
 	options.ssaaOn = 0;
+	memset( options.port, '\0', 16 );
+	strcpy( options.port, "6666" );
 }
 
 bool Server::ArgvOptionsParse( int argc, char *argv[] ) {
@@ -28,8 +30,17 @@ bool Server::ArgvOptionsParse( int argc, char *argv[] ) {
 				else if( !strcmp( "ssaaOn", argv[i]+1 ) ) {
 					options.ssaaOn = atoi( argv[i+1] );
 				}
+				else if( !strcmp( "port", argv[i]+1 ) ) {
+					memset( options.port, '\0', 16 );
+					strcpy( options.port, argv[i+1] );
+				}
 			}
 		}
 	}
+
 	return true;
+}
+
+void Server::Start() {
+	socketListen = Socket::MakeListenSocket( options.port );
 }

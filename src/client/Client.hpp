@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Socket.hpp"
+
 class Client {
 public:
 	Client();
@@ -13,5 +15,6 @@ private:
 		int ssaaOn;
 	}options;
 
+	List<int> socketsServers;
 };
 

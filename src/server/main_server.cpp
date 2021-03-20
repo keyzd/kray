@@ -17,10 +17,11 @@
 
 int main( int argc, char *argv[] ) {
 	Server app;
-
 	if( !app.ArgvOptionsParse( argc, argv ) ) {
 		return 0;
 	}
+
+	app.Start();
 
 	Scene scene;
 
