@@ -1,7 +1,7 @@
 CXX := g++
 CXXFLAGS := -g -Wall -Wextra -pedantic
 CXXFLAGS += -DINTERSECT_SPHERE_ALGEBRAIC
-LDFLAGS := -lm
+LDFLAGS := -lm -lpthread
 
 SRC_COMMON_DIR := ./src
 SRC_CLIENT_DIR := $(SRC_COMMON_DIR)/client
@@ -15,7 +15,7 @@ BUILD_DIR := ./build
 EXEC_CLIENT := client
 EXEC_SERVER := server
 
-SRCS_CLIENT := $(shell find $(SRC_COMMON_DIR) -name '*.cpp' ! -name $(MAIN_CLIENT) ! -path $(SRC_SERVER_DIR)'/*')
+SRCS_CLIENT := $(shell find $(SRC_CLIENT_DIR) -name '*.cpp' ! -name $(MAIN_CLIENT) ! -path $(SRC_SERVER_DIR)'/*')
 OBJS_CLIENT := $(SRCS_CLIENT:%=$(BUILD_DIR)/%.o)
 
 SRCS_SERVER := $(shell find $(SRC_COMMON_DIR) -name '*.cpp' ! -name $(MAIN_SERVER) ! -path $(SRC_CLIENT_DIR)'/*')

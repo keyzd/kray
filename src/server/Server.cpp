@@ -1,9 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 
 #include "Server.hpp"
+
+#include "../PpmImage.hpp"
 #include "../common.hpp"
+#include "../Scene.hpp"
+#include "../Framebuffer.hpp"
+#include "renderer.hpp"
+
+#include "../objects.hpp"
+#include "../materials.hpp"
+#include "../lmaps.hpp"
+#include "../math.hpp"
+#include "../camera.hpp"
+
+void* ClientRoutine( void* arg ) {
+	Scene scene;
+
+	IMaterial* nm = new MaterialNormalMap;
+
+	Sphere *s1 = new Sphere( Vec3( 0.0f, 0.0f, 2.0f ), 0.5f );
+	s1->SetMaterial( nm );
+
+	Sphere *s2 = new Sphere( Vec3( 0.5f, 0.2f, 1.5f ), 0.2f );
+	s2->SetMaterial( nm );
+
+	scene.SetObject( s1 );
+	scene.SetObject( s2 );
+
+	Framebuffer fb( 480, 480 );
+
+	CameraPinhole cam;
+	cam.RenderScene( scene, fb );
+
+	PpmImage img( 480, 480, "out.ppm" );
+	img.SetBuf( fb.buf, fb.width*fb.height );
+}
 
 Server::Server() {
 	options.width = 0;
@@ -41,6 +76,20 @@ bool Server::ArgvOptionsParse( int argc, char *argv[] ) {
 	return true;
 }
 
-void Server::Start() {
+bool Server::Start( int argc, char* argv[] ) {
 	socketListen = Socket::MakeListenSocket( options.port );
+	return ArgvOptionsParse( argc, argv );
+}
+
+void Server::Run() {
+	List<pthread_t> threadsIDs;
+	pthread_t th;
+
+	while( true ) {
+		int socketClient = accept( socketListen, NULL, NULL );
+		socketsClients.Push( socketClient );
+		pthread_create( &th, NULL, ClientRoutine, NULL );
+	}
+
+	pthread_join(th, NULL);
 }

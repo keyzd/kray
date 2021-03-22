@@ -3,13 +3,14 @@
 #include "../utils/List.hpp"
 #include "../Socket.hpp"
 
+void* ClientRoutine( void* arg );
+
 class Server {
 public:
 	Server();
 
-	bool ArgvOptionsParse( int argc, char *argv[] );
-
-	void Start();
+	bool Start( int argc, char* argv[] );
+	void Run();
 
 private:
 	struct Options {
@@ -20,6 +21,9 @@ private:
 	}options;
 
 	int socketListen;
-	int socketClient;
+	List<int> socketsClients;
+
+private:
+	bool ArgvOptionsParse( int argc, char* argv[] );
 };
 
