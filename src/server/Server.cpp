@@ -17,7 +17,7 @@
 #include "../math.hpp"
 #include "../camera.hpp"
 
-void* ClientRoutine( void* arg ) {
+static void* ClientRoutine( void* arg ) {
 	Scene scene;
 
 	IMaterial* nm = new MaterialNormalMap;
@@ -38,6 +38,14 @@ void* ClientRoutine( void* arg ) {
 
 	PpmImage img( 480, 480, "out.ppm" );
 	img.SetBuf( fb.buf, fb.width*fb.height );
+
+	LMapScale ms( 2 );
+	LMapRotateZ mrz( -90.0f );
+	LMap mc = ms * mrz;
+
+	Vec3 u( 1, 0, 0);
+	Vec4 v = mc * u;
+	printf( "%f %f %f %f\n", v.x, v.y, v.z, v.w );
 }
 
 Server::Server() {

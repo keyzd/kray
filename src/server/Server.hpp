@@ -3,7 +3,7 @@
 #include "../utils/List.hpp"
 #include "../Socket.hpp"
 
-void* ClientRoutine( void* arg );
+static void* ClientRoutine( void* arg );
 
 class Server {
 public:

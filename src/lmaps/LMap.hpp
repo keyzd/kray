@@ -13,6 +13,8 @@ public:
 
 	Vec4 operator*( const Vec3 &u ) const;
 	Vec4 operator*( const Vec4 &u ) const;
+	LMap operator*( const LMap &map ) const;
+
 	LMap Inverse() const;
 
 protected:
@@ -29,4 +31,8 @@ inline Vec4 LMap::operator*(const Vec4 &u) const {
 
 inline LMap LMap::Inverse() const {
 	return LMap( mInv, m );
+}
+
+inline LMap LMap::operator*( const LMap &map ) const {
+	return LMap( m * map.m, mInv * map.mInv );
 }
