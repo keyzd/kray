@@ -9,7 +9,7 @@
 #include "../common.hpp"
 #include "../Scene.hpp"
 #include "../Framebuffer.hpp"
-#include "renderer.hpp"
+#include "Renderer.hpp"
 
 #include "../objects.hpp"
 #include "../materials.hpp"
@@ -17,7 +17,7 @@
 #include "../math.hpp"
 #include "../camera.hpp"
 
-static void* ClientRoutine( void* arg ) {
+void* ClientRoutine( void* arg ) {
 	Scene scene;
 
 	IMaterial* nm = new MaterialNormalMap;
@@ -33,8 +33,10 @@ static void* ClientRoutine( void* arg ) {
 
 	Framebuffer fb( 480, 480 );
 
+	Renderer rend;
+
 	CameraPinhole cam;
-	cam.RenderScene( scene, fb );
+	cam.RenderScene( scene, fb, rend );
 
 	PpmImage img( 480, 480, "out.ppm" );
 	img.SetBuf( fb.buf, fb.width*fb.height );
@@ -88,7 +90,7 @@ void Server::Run() {
 	while( true ) {
 		int socketClient = accept( socketListen, NULL, NULL );
 		socketsClients.Push( socketClient );
-		pthread_create( &th, NULL, ClientRoutine, NULL );
+		pthread_create( &threadsIDs[0], NULL, ClientRoutine, NULL );
 	}
 
 	pthread_join(th, NULL);

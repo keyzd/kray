@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -g -Wall -Wextra -pedantic
+CXXFLAGS := -g -Wall
 CXXFLAGS += -DINTERSECT_SPHERE_ALGEBRAIC
 LDFLAGS := -lm -lpthread
 

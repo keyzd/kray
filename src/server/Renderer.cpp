@@ -1,14 +1,13 @@
-#include <stdio.h>
 #include <math.h>
 
-#include "renderer.hpp"
+#include "Renderer.hpp"
 #include "../common.hpp"
 #include "../materials/ShadeRecord.hpp"
 
 /*
  * Return pixel color for the ray
  */
-Vec3 R_Trace( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
+Vec3 Renderer::R_Trace( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
 	const IObject* closestObject = R_FindClosestObject( scene, ray, tMin, tMax );
 
 	if( closestObject == NULL ) {
@@ -26,7 +25,7 @@ Vec3 R_Trace( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
 	return closestObject->GetMaterial().Shade( sr );
 }
 
-const IObject* R_FindClosestObject( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
+const IObject* Renderer::R_FindClosestObject( const Scene &scene, const Ray &ray, float tMin, float tMax ) {
 	long long closestIndex = CLOSEST_DEFAULT_INDEX;
 	Vec3 hitPoint;
 	float closestT = INFINITY;
@@ -48,6 +47,6 @@ const IObject* R_FindClosestObject( const Scene &scene, const Ray &ray, float tM
 	return scene.GetObjectPtr( closestIndex );
 }
 
-Vec3 R_Miss() {
+Vec3 Renderer::R_Miss() {
 	return Vec3( 1.0f );
 }
